@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026 宮古島親子旅行｜6/17-6/21</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2a32;
+      --muted: #66737c;
+      --line: #dbe7eb;
+      --paper: #fbfcf9;
+      --panel: #ffffff;
+      --sea: #d6f1f2;
+      --sea-deep: #83cdd1;
+      --green: #2f8f7c;
+      --blue: #2474a8;
+      --gold: #d69b2f;
+      --cyan: #1e9db2;
+      --orange: #d97735;
+      --purple: #8a55b5;
+      --red: #c85348;
+      --shadow: 0 20px 60px rgba(31, 42, 50, 0.12);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(214, 241, 242, 0.95) 0, rgba(251, 252, 249, 0.92) 420px),
+        var(--paper);
+    }
+
+    a {
+      color: #126d85;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 36px 0 22px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 36px 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: #176a7d;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(40px, 7vw, 76px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      max-width: 680px;
+      color: #41535e;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .fact {
+      padding: 14px;
+      border: 1px solid rgba(31, 42, 50, 0.1);
+      background: rgba(255, 255, 255, 0.68);
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+    }
+
+    .fact strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .fact span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .hero-board {
+      min-height: 360px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(233, 247, 247, 0.96)),
+        #fff;
+      border: 1px solid rgba(31, 42, 50, 0.1);
+      padding: 22px;
+    }
+
+    .hero-board h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .hero-flight {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #d7e5e8;
+      margin-bottom: 12px;
+    }
+
+    .hero-flight strong {
+      color: #176a7d;
+      font-size: 15px;
+    }
+
+    .hero-flight .route {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-flight .route span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 3px;
+    }
+
+    .hero-flight .time {
+      font-size: 32px;
+      font-weight: 1000;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .hero-flight .arrow {
+      color: #6e8b94;
+      font-weight: 1000;
+    }
+
+    .hero-board-note {
+      margin: 14px 0 0;
+      color: #53656f;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(251, 252, 249, 0.94);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(31, 42, 50, 0.08);
+      border-bottom: 1px solid rgba(31, 42, 50, 0.1);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 0;
+      scrollbar-width: thin;
+    }
+
+    .tab {
+      flex: 0 0 auto;
+      border: 1px solid #c8d8dc;
+      border-radius: 999px;
+      background: #fff;
+      color: #32454f;
+      padding: 10px 16px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .tab[aria-selected="true"] {
+      color: #fff;
+      border-color: #176a7d;
+      background: #176a7d;
+    }
+
+    main {
+      padding: 26px 0 56px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 410px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .map-panel,
+    .section,
+    .info-panel {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 8px;
+      box-shadow: 0 12px 36px rgba(31, 42, 50, 0.08);
+    }
+
+    .map-panel {
+      position: sticky;
+      top: 76px;
+      padding: 16px;
+    }
+
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .map-header h2,
+    .section h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .map-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 8px 0 0;
+    }
+
+    .map-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1.08;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #e9f7f7;
+      border: 1px solid #c8e3e5;
+    }
+
+    .map-controls {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: grid;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .map-control {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(31, 42, 50, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #213640;
+      font: inherit;
+      font-size: 18px;
+      font-weight: 1000;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(31, 42, 50, 0.12);
+    }
+
+    .map-control.reset {
+      font-size: 12px;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .island {
+      fill: #f6f3df;
+      stroke: #9dbd9c;
+      stroke-width: 2;
+    }
+
+    .bridge {
+      stroke: #aac8c9;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 5 5;
+    }
+
+    .route-line {
+      fill: none;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .marker-group {
+      opacity: 0.24;
+      transform-origin: center;
+      transition: opacity 0.18s ease, filter 0.18s ease;
+      cursor: pointer;
+    }
+
+    .marker-group.active {
+      opacity: 1;
+      filter: drop-shadow(0 4px 5px rgba(31, 42, 50, 0.24));
+    }
+
+    .marker-label {
+      fill: #1f2a32;
+      font-size: 12px;
+      font-weight: 900;
+      paint-order: stroke;
+      stroke: rgba(255, 255, 255, 0.9);
+      stroke-width: 4px;
+      stroke-linejoin: round;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #41535e;
+    }
+
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .section {
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .section > p {
+      color: #53656f;
+      line-height: 1.75;
+      margin: 10px 0 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .info-panel,
+    .day-card,
+    .timeline-item {
+      border-radius: 8px;
+    }
+
+    .info-panel {
+      padding: 16px;
+    }
+
+    .info-panel h3,
+    .day-card h3,
+    .timeline-text h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .info-panel p,
+    .day-card p {
+      margin: 0;
+      color: #53656f;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .flight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .flight {
+      border: 1px solid #d4e0e3;
+      border-radius: 8px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .flight-code {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: #176a7d;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .airports {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .airport-code {
+      font-size: 34px;
+      font-weight: 1000;
+      letter-spacing: 0;
+    }
+
+    .airport small {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .plane {
+      color: #6e8b94;
+      font-size: 24px;
+    }
+
+    .day-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .day-card {
+      border: 1px solid #d8e4e7;
+      background: #fff;
+      padding: 14px;
+      min-height: 160px;
+      appearance: none;
+      color: inherit;
+      cursor: pointer;
+      display: block;
+      font: inherit;
+      text-align: left;
+      width: 100%;
+    }
+
+    .day-card:hover {
+      border-color: #8fc3cc;
+      box-shadow: 0 8px 20px rgba(31, 42, 50, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .day-card time {
+      display: inline-block;
+      color: #176a7d;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #d3e0e3;
+      border-radius: 999px;
+      color: #334a55;
+      background: #f8fbfb;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .timeline {
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 16px;
+      border: 1px solid #d8e4e7;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .place-visual {
+      position: relative;
+      min-height: 150px;
+      border-radius: 8px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.62), transparent 42%),
+        linear-gradient(135deg, rgba(30, 157, 178, 0.2), rgba(214, 155, 47, 0.18)),
+        #eef7f7;
+      border-top: 5px solid var(--place-color, #1e9db2);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px;
+      color: #24414b;
+    }
+
+    .place-visual .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.92);
+      color: #176a7d;
+      font-size: 20px;
+      font-weight: 1000;
+    }
+
+    .place-visual strong {
+      display: block;
+      margin-top: 18px;
+      font-size: 19px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .place-visual span {
+      display: block;
+      margin-top: 8px;
+      color: #53656f;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .timeline-text {
+      min-width: 0;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: #53656f;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .pill {
+      border-radius: 999px;
+      background: #eef7f7;
+      padding: 6px 9px;
+    }
+
+    .timeline-text p {
+      color: #53656f;
+      line-height: 1.7;
+      margin: 0 0 12px;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 11px;
+      border: 1px solid #cfe0e4;
+      border-radius: 8px;
+      background: #f9fcfc;
+      font-size: 14px;
+    }
+
+    .callout {
+      border-left: 4px solid var(--gold);
+      background: #fffaf0;
+      padding: 14px 16px;
+      border-radius: 8px;
+      color: #56422a;
+      line-height: 1.65;
+      margin-top: 14px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      padding: 12px 14px;
+      border: 1px solid #d8e4e7;
+      border-radius: 8px;
+      background: #fff;
+      color: #435762;
+      line-height: 1.6;
+    }
+
+    .map-tooltip {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(31, 42, 50, 0.12);
+      background: rgba(255, 255, 255, 0.94);
+      padding: 10px 12px;
+      color: #334a55;
+      box-shadow: 0 10px 28px rgba(31, 42, 50, 0.12);
+      pointer-events: none;
+    }
+
+    .map-tooltip strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 14px;
+    }
+
+    .map-tooltip span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    footer {
+      padding: 24px 0 38px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        min-height: auto;
+        padding-bottom: 8px;
+      }
+
+      .hero-board {
+        min-height: 320px;
+      }
+
+      .map-panel {
+        position: relative;
+        top: auto;
+        order: -1;
+      }
+
+      .day-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .wrap {
+        width: min(100% - 22px, 1180px);
+      }
+
+      header {
+        padding-top: 24px;
+      }
+
+      .quick-facts,
+      .cards,
+      .flight-grid,
+      .day-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 16px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .place-visual {
+        min-height: 190px;
+      }
+
+      .map-frame {
+        aspect-ratio: 1 / 1.12;
+      }
+
+      .airport-code {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div class="hero-copy">
+        <p class="eyebrow">2026/6/17（三）- 6/21（日）｜2 位大人 + 1 位 2 歲半小孩</p>
+        <h1>宮古島親子旅行</h1>
+        <p class="lead">以小朋友友善、玩水、海神祭與輕鬆吃飯為主軸。每天只排一個主活動，下午留彈性休息，讓大人小孩都能舒服地享受宮古藍。</p>
+        <div class="quick-facts" aria-label="旅行重點">
+          <div class="fact"><strong>去程航班</strong><span>6/17 JX308：07:20 台中 RMQ → 09:40 下地島 SHI。</span></div>
+          <div class="fact"><strong>回程航班</strong><span>6/21 JX309：10:40 下地島 SHI → 11:00 台中 RMQ。</span></div>
+          <div class="fact"><strong>飯店</strong><span>棕櫚泉宮古島度假村，平良久貝，4 晚。</span></div>
+        </div>
+      </div>
+      <aside class="hero-board" aria-label="航班時間快看">
+        <h2>航班時間快看</h2>
+        <div class="hero-flight">
+          <strong>去程｜JX308｜2026/6/17（三）</strong>
+          <div class="route">
+            <div><div class="time">07:20</div><span>RMQ 台中國際機場起飛</span></div>
+            <div class="arrow">→</div>
+            <div><div class="time">09:40</div><span>SHI 下地島機場抵達</span></div>
+          </div>
+        </div>
+        <div class="hero-flight">
+          <strong>回程｜JX309｜2026/6/21（日）</strong>
+          <div class="route">
+            <div><div class="time">10:40</div><span>SHI 下地島機場起飛</span></div>
+            <div class="arrow">→</div>
+            <div><div class="time">11:00</div><span>RMQ 台中國際機場抵達</span></div>
+          </div>
+        </div>
+        <p class="hero-board-note">建議 6/21 08:30 前完成還車，保留兒童座椅拆裝、接駁與托運行李時間。</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="toolbar" aria-label="行程切換">
+    <div class="wrap tabs" role="tablist">
+      <button class="tab" type="button" role="tab" aria-selected="true" data-tab="overview">總覽</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="day617">6/17 抵達</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="day618">6/18 海神祭</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="day619">6/19 玩水體驗</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="day620">6/20 北部與採買</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="day621">6/21 回程</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap layout">
+      <section class="content" aria-live="polite">
+        <article class="view active" id="overview">
+          <section class="section">
+            <h2>旅行總覽</h2>
+            <p>這份行程把「小孩玩水、爸媽不崩潰」放在第一順位。6/18 剛好遇到宮古島ハーリー海神祭，安排去佐良浜漁港感受當地盛會；6/19 則安排一次親子友善的海上體驗。</p>
+            <div class="day-grid">
+              <button class="day-card js-jump" type="button" data-tab="day617">
+                <time>6/17（三）</time>
+                <h3>抵達、取車、看海</h3>
+                <p>下地島機場取車，17END 與佐和田之濱輕鬆看海，入住後到 Painagama Beach 踩水。</p>
+              </button>
+              <button class="day-card js-jump" type="button" data-tab="day618">
+                <time>6/18（四）</time>
+                <h3>海神祭與燒肉</h3>
+                <p>早上去佐良浜漁港看ハーリー，下午休息，傍晚安排親子友善燒肉。</p>
+              </button>
+              <button class="day-card js-jump" type="button" data-tab="day619">
+                <time>6/19（五）</time>
+                <h3>玻璃船與沙灘</h3>
+                <p>シースカイ博愛看海龜與珊瑚，下午到シギラビーチ或わいわいビーチ玩水。</p>
+              </button>
+              <button class="day-card js-jump" type="button" data-tab="day620">
+                <time>6/20（六）</time>
+                <h3>池間島、宮古麵、採買</h3>
+                <p>池間大橋與池間島看景，午餐にいまそば，下午採買母嬰用品與伴手禮。</p>
+              </button>
+              <button class="day-card js-jump" type="button" data-tab="day621">
+                <time>6/21（日）</time>
+                <h3>退房與還車</h3>
+                <p>早起退房，08:30 前還車，10:40 從下地島機場起飛回台中。</p>
+              </button>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>航班資訊</h2>
+            <div class="flight-grid">
+              <div class="flight">
+                <div class="flight-code"><span>JX308</span><span>2026/6/17（三）</span></div>
+                <div class="airports">
+                  <div class="airport"><div class="airport-code">RMQ</div><small>07:20 起飛｜台中國際機場</small></div>
+                  <div class="plane">✈</div>
+                  <div class="airport"><div class="airport-code">SHI</div><small>09:40 抵達｜下地島機場</small></div>
+                </div>
+              </div>
+              <div class="flight">
+                <div class="flight-code"><span>JX309</span><span>2026/6/21（日）</span></div>
+                <div class="airports">
+                  <div class="airport"><div class="airport-code">SHI</div><small>10:40 起飛｜下地島機場</small></div>
+                  <div class="plane">✈</div>
+                  <div class="airport"><div class="airport-code">RMQ</div><small>11:00 抵達｜台中國際機場</small></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>住宿與交通</h2>
+            <div class="cards">
+              <div class="info-panel">
+                <h3>棕櫚泉宮古島度假村</h3>
+                <p>入住 2026/6/17，退房 2026/6/21。地址：沖縄県宮古島市平良久貝654-23。房型：高級雙床房，2 位成人與 1 位 2 歲兒童。</p>
+                <div class="tag-row">
+                  <a class="tag" href="https://www.klook.com/zh-TW/hotels/detail/115529-palm-springs-miyakojima-resort/" target="_blank" rel="noreferrer">中文飯店介紹</a>
+                  <a class="tag" href="https://maps.google.com/?q=Palm%20Springs%20Miyakojima%20Resort" target="_blank" rel="noreferrer">Google Maps</a>
+                </div>
+              </div>
+              <div class="info-panel">
+                <h3>下地島機場租車 / 還車</h3>
+                <p>建議抵達後直接取車，回程 08:30 前完成還車。訂車時確認兒童座椅、免責補償、NOC 補償與機場接送方式。</p>
+                <div class="tag-row">
+                  <a class="tag" href="https://meets-rentacar.com/" target="_blank" rel="noreferrer">租車參考</a>
+                  <a class="tag" href="https://maps.google.com/?q=%E4%B8%8B%E5%9C%B0%E5%B3%B6%E7%A9%BA%E6%B8%AF%20%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noreferrer">Google Maps</a>
+                </div>
+              </div>
+            </div>
+            <div class="callout">親子提醒：每天車上放一套乾衣服、浴巾、防曬、補水、簡單零食。海邊活動以「先玩短一點」為原則，狀況好再加碼。</div>
+          </section>
+
+          <section class="section">
+            <h2>必訂與備忘</h2>
+            <ul class="list">
+              <li><strong>租車：</strong>下地島機場取還車，確認兒童座椅、NOC 免責、接送位置。</li>
+              <li><strong>6/18 祭典：</strong>佐良浜漁港ハーリー，帶帽子、防曬、現金與輕便雨具。</li>
+              <li><strong>6/19 體驗：</strong>シースカイ博愛建議訂 09:00 或 10:00，避免卡午休與午後炎熱。</li>
+              <li><strong>燒肉：</strong>ホルモン家優先訂 17:00，備註 2 位成人 + 1 位幼兒，希望親子友善座位。</li>
+            </ul>
+          </section>
+        </article>
+      </section>
+
+      <aside class="map-panel" aria-label="宮古島電子圖台">
+        <div class="map-header">
+          <h2>電子圖台</h2>
+          <span class="tag" id="mapMode">總覽</span>
+        </div>
+        <div class="map-frame">
+          <div class="map-controls" aria-label="地圖縮放控制">
+            <button class="map-control" type="button" data-map-action="zoom-in" aria-label="放大地圖">+</button>
+            <button class="map-control" type="button" data-map-action="zoom-out" aria-label="縮小地圖">−</button>
+            <button class="map-control reset" type="button" data-map-action="reset" aria-label="重設地圖縮放">重設</button>
+          </div>
+          <svg id="tripMap" viewBox="0 0 420 460" role="img" aria-label="宮古島旅行行程位置圖">
+            <rect width="420" height="460" fill="#e2f5f6"></rect>
+            <path class="bridge" d="M145 172 C180 181, 210 196, 245 218"></path>
+            <path class="bridge" d="M300 92 C318 84, 338 77, 360 74"></path>
+            <path class="island" d="M248 142 C291 126, 341 139, 361 179 C386 230, 372 284, 346 329 C323 370, 291 409, 241 405 C197 402, 159 376, 141 338 C121 296, 122 245, 145 208 C166 174, 208 157, 248 142 Z"></path>
+            <path class="island" d="M75 106 C105 88, 142 94, 162 121 C180 146, 173 178, 150 198 C123 221, 83 220, 61 193 C37 164, 44 125, 75 106 Z"></path>
+            <path class="island" d="M65 52 C83 42, 106 46, 118 64 C130 83, 122 106, 101 115 C83 123, 62 117, 52 99 C43 81, 48 62, 65 52 Z"></path>
+            <path class="island" d="M358 49 C374 38, 394 42, 404 58 C414 75, 405 96, 386 102 C367 108, 350 96, 346 77 C344 65, 349 55, 358 49 Z"></path>
+            <text x="255" y="270" fill="#9ab2a4" font-size="28" font-weight="900" opacity="0.42">宮古島</text>
+            <text x="74" y="166" fill="#9ab2a4" font-size="18" font-weight="900" opacity="0.48">伊良部島</text>
+            <text x="60" y="78" fill="#9ab2a4" font-size="13" font-weight="900" opacity="0.55">下地島</text>
+            <text x="356" y="80" fill="#9ab2a4" font-size="13" font-weight="900" opacity="0.55">池間島</text>
+            <g id="routes"></g>
+            <g id="markers"></g>
+          </svg>
+          <div class="map-tooltip" id="mapTip">
+            <strong>點選標記看位置</strong>
+            <span>切換日期時，地圖會突出當天路線與點位。</span>
+          </div>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background: var(--gold)"></i>飯店</span>
+          <span><i class="dot" style="background: var(--blue)"></i>機場</span>
+          <span><i class="dot" style="background: var(--green)"></i>租車 / 還車</span>
+          <span><i class="dot" style="background: var(--cyan)"></i>景點 / 海灘</span>
+          <span><i class="dot" style="background: var(--orange)"></i>餐廳</span>
+          <span><i class="dot" style="background: var(--purple)"></i>購物</span>
+        </div>
+        <p class="map-note">這是離線用的簡化位置圖，可用 + / − 或滑鼠滾輪縮放；實際導航請點各景點的 Google Maps 連結。</p>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">製作時間：2026/5/19。外部介紹與 Google Maps 需要網路；行程內容與簡化電子圖台可離線閱讀。</div>
+  </footer>
+
+  <script>
+    const stops = {
+      airport: { name: "下地島機場", type: "airport", x: 80, y: 88, desc: "抵達與回程機場", map: "https://maps.google.com/?q=Shimojishima%20Airport", intro: "https://zh.wikipedia.org/wiki/%E4%B8%8B%E5%9C%B0%E5%B3%B6%E6%A9%9F%E5%A0%B4" },
+      rental: { name: "下地島機場租車", type: "rental", x: 101, y: 105, desc: "取車與還車地點", map: "https://maps.google.com/?q=%E4%B8%8B%E5%9C%B0%E5%B3%B6%E7%A9%BA%E6%B8%AF%20%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC", intro: "https://meets-rentacar.com/" },
+      end17: { name: "17END", type: "spot", x: 61, y: 62, desc: "下地島北端的宮古藍海景", map: "https://maps.google.com/?q=17END%20Miyakojima", intro: "https://www.tanoshima.jp/facilities/detail/17end?category=spot" },
+      sawada: { name: "佐和田之濱", type: "spot", x: 113, y: 144, desc: "日本渚百選，適合看海與踩水", map: "https://maps.google.com/?q=%E4%BD%90%E5%92%8C%E7%94%B0%E3%81%AE%E6%B5%9C", intro: "https://www.gltjp.com/zh-hant/directory/item/16191/" },
+      hotel: { name: "棕櫚泉宮古島度假村", type: "hotel", x: 226, y: 231, desc: "6/17-6/21 住宿", map: "https://maps.google.com/?q=Palm%20Springs%20Miyakojima%20Resort", intro: "https://www.klook.com/zh-TW/hotels/detail/115529-palm-springs-miyakojima-resort/" },
+      painagama: { name: "Painagama Beach", type: "spot", x: 233, y: 211, desc: "市區旁親民海灘", map: "https://maps.google.com/?q=Painagama%20Beach", intro: "https://japantravel.navitime.com/zh-tw/area/jp/spot/02301-pn0002196/" },
+      donki: { name: "唐吉訶德宮古島店", type: "shop", x: 286, y: 242, desc: "第一天補給與伴手禮", map: "https://maps.google.com/?q=%E3%83%89%E3%83%B3%E3%83%BB%E3%82%AD%E3%83%9B%E3%83%BC%E3%83%86%E5%AE%AE%E5%8F%A4%E5%B3%B6%E5%BA%97", intro: "https://www.donki.com/store/shop_detail.php?shop_id=420" },
+      sarahama: { name: "佐良浜漁港ハーリー", type: "spot", x: 151, y: 157, desc: "海神祭主要會場之一", map: "https://maps.google.com/?q=%E4%BD%90%E8%89%AF%E6%B5%9C%E6%BC%81%E6%B8%AF", intro: "https://miyakojima.jp/events/haarii/" },
+      yakiniku: { name: "ホルモン家", type: "food", x: 263, y: 224, desc: "親子友善燒肉候選", map: "https://maps.google.com/?q=%E3%83%9B%E3%83%AB%E3%83%A2%E3%83%B3%E5%AE%B6%20%E5%AE%AE%E5%8F%A4%E5%B3%B6", intro: "https://maps.google.com/?q=%E3%83%9B%E3%83%AB%E3%83%A2%E3%83%B3%E5%AE%B6%20%E5%AE%AE%E5%8F%A4%E5%B3%B6" },
+      seasky: { name: "シースカイ博愛", type: "spot", x: 315, y: 331, desc: "半潛水式玻璃船", map: "https://maps.google.com/?q=%E3%82%B7%E3%83%BC%E3%82%B9%E3%82%AB%E3%82%A4%E5%8D%9A%E6%84%9B", intro: "https://www.nanseirakuen.com/activity/sea-sky-hakuai/" },
+      shigira: { name: "シギラビーチ", type: "spot", x: 327, y: 345, desc: "設施較完整的親子海灘", map: "https://maps.google.com/?q=%E3%82%B7%E3%82%AE%E3%83%A9%E3%83%93%E3%83%BC%E3%83%81", intro: "https://churarin.com/shigira-beach/" },
+      waiwai: { name: "わいわいビーチ", type: "spot", x: 308, y: 333, desc: "可能看見海龜的人工海灘", map: "https://maps.google.com/?q=%E3%82%8F%E3%81%84%E3%82%8F%E3%81%84%E3%83%93%E3%83%BC%E3%83%81%20%E5%AE%AE%E5%8F%A4%E5%B3%B6", intro: "https://myakuzumi.com/6692/" },
+      ikemaBridge: { name: "池間大橋", type: "spot", x: 337, y: 96, desc: "前往池間島的海景橋", map: "https://maps.google.com/?q=%E6%B1%A0%E9%96%93%E5%A4%A7%E6%A9%8B", intro: "https://zh.wikipedia.org/wiki/%E6%B1%A0%E9%96%93%E5%A4%A7%E6%A9%8B" },
+      ikema: { name: "池間島", type: "spot", x: 377, y: 72, desc: "北端小島與海景", map: "https://maps.google.com/?q=%E6%B1%A0%E9%96%93%E5%B3%B6", intro: "https://zh.wikipedia.org/wiki/%E6%B1%A0%E9%96%93%E5%B3%B6" },
+      niima: { name: "にいまそば", type: "food", x: 300, y: 126, desc: "北部宮古そば午餐", map: "https://maps.google.com/?q=%E3%81%AB%E3%81%84%E3%81%BE%E3%81%9D%E3%81%B0", intro: "https://myakuzumi.com/93/" },
+      yukishio: { name: "雪塩ミュージアム", type: "spot", x: 314, y: 115, desc: "伴手禮與短暫室內休息", map: "https://maps.google.com/?q=%E9%9B%AA%E5%A1%A9%E3%83%9F%E3%83%A5%E3%83%BC%E3%82%B8%E3%82%A2%E3%83%A0", intro: "https://www.yukisio.com/" },
+      nishimatsuya: { name: "西松屋 / イオンタウン宮古南", type: "shop", x: 286, y: 263, desc: "母嬰用品與生活採買", map: "https://maps.google.com/?q=%E8%A5%BF%E6%9D%BE%E5%B1%8B%20%E3%82%A4%E3%82%AA%E3%83%B3%E3%82%BF%E3%82%A6%E3%83%B3%E5%AE%AE%E5%8F%A4%E5%8D%97%E5%BA%97", intro: "https://www.24028.jp/tenpo/detail.php?cid=47&doc=1398" }
+    };
+
+    const days = {
+      overview: Object.keys(stops),
+      day617: ["airport", "rental", "end17", "sawada", "hotel", "painagama", "donki"],
+      day618: ["hotel", "sarahama", "hotel", "yakiniku"],
+      day619: ["hotel", "seasky", "shigira", "waiwai", "hotel"],
+      day620: ["hotel", "ikemaBridge", "ikema", "niima", "yukishio", "nishimatsuya", "hotel"],
+      day621: ["hotel", "rental", "airport"]
+    };
+
+    const routeColors = {
+      day617: "#2b90a8",
+      day618: "#c85348",
+      day619: "#2f8f7c",
+      day620: "#8a55b5",
+      day621: "#d69b2f"
+    };
+
+    const dayDetails = {
+      day617: {
+        title: "6/17（三）抵達、取車、看海",
+        intro: "第一天重點是順利落地、取車、入住，不把小孩體力花光。海灘以看海、踩水、玩沙為主。",
+        items: [
+          ["09:40", "下地島機場", "JX308 抵達。先處理行李、洗手間、補水，再前往租車櫃檯或接送點。", "airport"],
+          ["10:20", "下地島機場租車", "確認兒童座椅安裝、車況照片、NOC 免責與還車時間。", "rental"],
+          ["11:00", "17END", "先用宮古藍開場，看飛機與海，停留拍照即可。", "end17"],
+          ["11:45", "佐和田之濱", "日本渚百選之一，適合短暫踩水、看淺灘與巨石海景。", "sawada"],
+          ["15:00", "棕櫚泉宮古島度假村", "入住、整理行李、午休或洗澡。第一天不要急著排滿。", "hotel"],
+          ["16:30", "Painagama Beach", "飯店附近的市區海灘，適合短時間玩沙、踩水、看夕陽。", "painagama"],
+          ["晚餐後", "唐吉訶德宮古島店", "補水、零食、防曬、濕紙巾、玩水小物與伴手禮。", "donki"]
+        ]
+      },
+      day618: {
+        title: "6/18（四）海神祭與燒肉",
+        intro: "這天是旅程最有在地感的一天。上午去佐良浜漁港看ハーリー，午後回飯店休息，傍晚早點吃燒肉。",
+        items: [
+          ["09:00", "佐良浜漁港ハーリー", "宮古島海神祭的熱鬧會場之一，可看爬龍船、港邊慶典與攤販。", "sarahama"],
+          ["12:00", "祭典午餐或平良市區", "用攤販簡單吃，若太熱就回市區找冷氣餐廳。帶現金會更方便。", "sarahama"],
+          ["14:00", "飯店休息", "洗澡、午睡、補水。這段留白會讓晚餐穩很多。", "hotel"],
+          ["17:00", "ホルモン家燒肉", "老公的燒肉願望放這晚，建議訂早時段並備註幼兒同行。", "yakiniku"]
+        ]
+      },
+      day619: {
+        title: "6/19（五）玻璃船與沙灘",
+        intro: "安排一次小朋友友善的海上體驗。早上看珊瑚與海龜，下午視體力選一個沙灘短玩。",
+        items: [
+          ["09:00", "シースカイ博愛", "半潛水式水中觀光船，不需要下水也能看海底世界，適合幼兒同行。", "seasky"],
+          ["11:30", "南部午餐", "用餐後直接回飯店或在南部找簡單餐廳，不硬塞景點。", "seasky"],
+          ["14:00", "飯店休息", "避免午後高溫，先讓小孩恢復電量。", "hotel"],
+          ["16:00", "シギラビーチ", "設施較完整，適合帶小孩短時間玩水，想省心就選這裡。", "shigira"],
+          ["備案", "わいわいビーチ", "有機會看到海龜，但設施較少；若選這裡，務必先確認盥洗與換衣安排。", "waiwai"]
+        ]
+      },
+      day620: {
+        title: "6/20（六）北部橋景、宮古麵與採買",
+        intro: "最後完整一天走北部海景，午餐吃にいまそば，下午回到市區採買母嬰用品與伴手禮。",
+        items: [
+          ["09:00", "池間大橋", "沿著北部開車看海，橋上風景很美，停留拍照即可。", "ikemaBridge"],
+          ["09:40", "池間島", "小島短停，看海、買飲料、讓小孩活動一下。", "ikema"],
+          ["11:00", "にいまそば", "北部人氣宮古そば，建議開門就到，避免排隊太久或售完。", "niima"],
+          ["12:30", "雪塩ミュージアム", "短暫室內休息、買鹽相關伴手禮，適合避暑。", "yukishio"],
+          ["16:00", "西松屋 / イオンタウン宮古南", "尿布、濕紙巾、母嬰用品與超市補給一次完成。", "nishimatsuya"]
+        ]
+      },
+      day621: {
+        title: "6/21（日）退房與回程",
+        intro: "這天不排景點，目標是舒服退房、準時還車與登機。",
+        items: [
+          ["07:30", "飯店退房", "確認房內沒有漏掉充電器、泳衣、兒童用品與護照。", "hotel"],
+          ["08:15", "下地島機場租車還車", "加油、還車、整理行李。保留時間處理兒童座椅與接駁。", "rental"],
+          ["10:40", "下地島機場", "JX309 起飛回台中，預計 11:00 抵達 RMQ。", "airport"]
+        ]
+      }
+    };
+
+    const typeColors = {
+      hotel: "#d69b2f",
+      airport: "#2474a8",
+      rental: "#2f8f7c",
+      spot: "#1e9db2",
+      food: "#d97735",
+      shop: "#8a55b5"
+    };
+
+    const typeIcons = {
+      hotel: "★",
+      airport: "✈",
+      rental: "車",
+      spot: "●",
+      food: "食",
+      shop: "買"
+    };
+
+    const content = document.querySelector(".content");
+    Object.entries(dayDetails).forEach(([id, day]) => {
+      const article = document.createElement("article");
+      article.className = "view";
+      article.id = id;
+      const timeline = day.items.map(item => {
+        const [time, title, text, stopKey] = item;
+        const stop = stops[stopKey];
+        return `
+          <div class="timeline-item">
+            <div class="place-visual" style="--place-color: ${typeColors[stop.type]}">
+              <div>
+                <div class="icon" style="color: ${typeColors[stop.type]}">${typeIcons[stop.type]}</div>
+              </div>
+              <div>
+                <strong>${title}</strong>
+                <span>${stop.desc}｜點下方連結看實際照片與介紹</span>
+              </div>
+            </div>
+            <div class="timeline-text">
+              <div class="meta"><span class="pill">${time}</span><span class="pill">${stop.desc}</span></div>
+              <h3>${title}</h3>
+              <p>${text}</p>
+              <div class="links">
+                <a href="${stop.intro}" target="_blank" rel="noreferrer">中文介紹 / 官方資訊</a>
+                <a href="${stop.map}" target="_blank" rel="noreferrer">Google Maps</a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+      article.innerHTML = `
+        <section class="section">
+          <h2>${day.title}</h2>
+          <p>${day.intro}</p>
+          <div class="timeline">${timeline}</div>
+        </section>
+        <section class="section">
+          <h2>當日親子提醒</h2>
+          <ul class="list">
+            <li>車上固定放水、毛巾、防曬、乾衣服與小零食。</li>
+            <li>若天氣太熱或小孩累了，優先刪掉下午行程，保留晚餐品質。</li>
+            <li>所有海邊活動都以短時間、淺水、陪同為原則。</li>
+          </ul>
+        </section>
+      `;
+      content.appendChild(article);
+    });
+
+    const markerLayer = document.getElementById("markers");
+    const routesLayer = document.getElementById("routes");
+    const mapTip = document.getElementById("mapTip");
+    const mapMode = document.getElementById("mapMode");
+    const tripMap = document.getElementById("tripMap");
+    const svgNS = "http://www.w3.org/2000/svg";
+    const defaultViewBox = { x: 0, y: 0, w: 420, h: 460 };
+    let currentViewBox = { ...defaultViewBox };
+
+    function makeSvg(tag, attrs = {}) {
+      const el = document.createElementNS(svgNS, tag);
+      Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
+      return el;
+    }
+
+    function applyViewBox() {
+      tripMap.setAttribute("viewBox", `${currentViewBox.x} ${currentViewBox.y} ${currentViewBox.w} ${currentViewBox.h}`);
+    }
+
+    function zoomMap(factor) {
+      const nextW = Math.max(150, Math.min(defaultViewBox.w, currentViewBox.w * factor));
+      const nextH = Math.max(165, Math.min(defaultViewBox.h, currentViewBox.h * factor));
+      const cx = currentViewBox.x + currentViewBox.w / 2;
+      const cy = currentViewBox.y + currentViewBox.h / 2;
+      currentViewBox = {
+        x: Math.max(defaultViewBox.x, Math.min(defaultViewBox.x + defaultViewBox.w - nextW, cx - nextW / 2)),
+        y: Math.max(defaultViewBox.y, Math.min(defaultViewBox.y + defaultViewBox.h - nextH, cy - nextH / 2)),
+        w: nextW,
+        h: nextH
+      };
+      applyViewBox();
+    }
+
+    function resetMapZoom() {
+      currentViewBox = { ...defaultViewBox };
+      applyViewBox();
+    }
+
+    Object.entries(routeColors).forEach(([day, color]) => {
+      const path = days[day].map((key, index) => {
+        const stop = stops[key];
+        return `${index === 0 ? "M" : "L"} ${stop.x} ${stop.y}`;
+      }).join(" ");
+      const line = makeSvg("path", { d: path, class: "route-line", id: `route-${day}`, stroke: color });
+      routesLayer.appendChild(line);
+    });
+
+    Object.entries(stops).forEach(([key, stop]) => {
+      const g = makeSvg("g", { class: "marker-group", id: `marker-${key}`, transform: `translate(${stop.x}, ${stop.y})`, tabindex: "0", role: "button", "aria-label": stop.name });
+      const circle = makeSvg("circle", { r: 12, fill: typeColors[stop.type], stroke: "#fff", "stroke-width": 3 });
+      const text = makeSvg("text", { x: 0, y: 4, "text-anchor": "middle", fill: "#fff", "font-size": stop.type === "rental" ? 8 : 10, "font-weight": 900 });
+      text.textContent = typeIcons[stop.type];
+      const label = makeSvg("text", { x: 15, y: 4, class: "marker-label" });
+      label.textContent = stop.name;
+      g.append(circle, text, label);
+      const showTip = () => {
+        mapTip.innerHTML = `<strong>${stop.name}</strong><span>${stop.desc}</span>`;
+      };
+      g.addEventListener("click", showTip);
+      g.addEventListener("focus", showTip);
+      markerLayer.appendChild(g);
+    });
+
+    document.querySelectorAll("[data-map-action]").forEach(button => {
+      button.addEventListener("click", () => {
+        const action = button.dataset.mapAction;
+        if (action === "zoom-in") zoomMap(0.72);
+        if (action === "zoom-out") zoomMap(1.28);
+        if (action === "reset") resetMapZoom();
+      });
+    });
+
+    tripMap.addEventListener("wheel", event => {
+      event.preventDefault();
+      zoomMap(event.deltaY < 0 ? 0.86 : 1.16);
+    }, { passive: false });
+
+    function setActiveTab(tabId) {
+      document.querySelectorAll(".tab").forEach(tab => {
+        tab.setAttribute("aria-selected", String(tab.dataset.tab === tabId));
+      });
+      document.querySelectorAll(".view").forEach(view => {
+        view.classList.toggle("active", view.id === tabId);
+      });
+      const activeStops = new Set(days[tabId]);
+      Object.keys(stops).forEach(key => {
+        const marker = document.getElementById(`marker-${key}`);
+        marker.classList.toggle("active", activeStops.has(key));
+      });
+      Object.keys(routeColors).forEach(day => {
+        const route = document.getElementById(`route-${day}`);
+        route.style.opacity = tabId === "overview" || tabId === day ? "0.92" : "0";
+        route.style.strokeWidth = tabId === day ? "5" : "2.5";
+      });
+      mapMode.textContent = tabId === "overview" ? "總覽" : document.querySelector(`.tab[data-tab="${tabId}"]`).textContent.trim();
+      const firstKey = days[tabId][0];
+      mapTip.innerHTML = `<strong>${stops[firstKey].name}</strong><span>${tabId === "overview" ? "目前顯示全部景點與路線。" : "目前突出顯示當天行程。"}</span>`;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.addEventListener("click", () => setActiveTab(tab.dataset.tab));
+    });
+
+    document.querySelectorAll(".js-jump").forEach(card => {
+      card.addEventListener("click", () => setActiveTab(card.dataset.tab));
+    });
+
+    setActiveTab("overview");
+  </script>
+</body>
+</html>
