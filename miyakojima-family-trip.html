@@ -89,6 +89,26 @@
       line-height: 1.75;
     }
 
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid rgba(23, 106, 125, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      color: #176a7d;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
     .quick-facts {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -715,6 +735,9 @@
         <p class="eyebrow">2026/6/17（三）- 6/21（日）｜2 位大人 + 1 位 2 歲半小孩</p>
         <h1>宮古島親子旅行</h1>
         <p class="lead">以小朋友友善、玩水、海神祭與輕鬆吃飯為主軸。每天只排一個主活動，下午留彈性休息，讓大人小孩都能舒服地享受宮古藍。</p>
+        <div class="hero-links">
+          <a class="hero-link" href="./miyakojima-food-guide.html">看美食備援地圖</a>
+        </div>
         <div class="quick-facts" aria-label="旅行重點">
           <div class="fact"><strong>去程航班</strong><span>6/17 JX308：07:20 台中 RMQ → 09:40 下地島 SHI。</span></div>
           <div class="fact"><strong>回程航班</strong><span>6/21 JX309：10:40 下地島 SHI → 11:00 台中 RMQ。</span></div>
