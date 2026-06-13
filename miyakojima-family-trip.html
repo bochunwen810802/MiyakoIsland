@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2026 宮古島親子旅行｜6/17-6/21</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <style>
     :root {
       color-scheme: light;
@@ -56,15 +57,8 @@
       padding: 36px 0 22px;
     }
 
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-      gap: 22px;
-      align-items: stretch;
-    }
-
     .hero-copy {
-      min-height: 360px;
+      min-height: 280px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -97,7 +91,7 @@
 
     .quick-facts {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
       margin-top: 24px;
     }
@@ -121,74 +115,6 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.45;
-    }
-
-    .hero-board {
-      min-height: 360px;
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-      box-shadow: var(--shadow);
-      background:
-        linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(233, 247, 247, 0.96)),
-        #fff;
-      border: 1px solid rgba(31, 42, 50, 0.1);
-      padding: 22px;
-    }
-
-    .hero-board h2 {
-      margin: 0 0 14px;
-      font-size: 22px;
-      letter-spacing: 0;
-    }
-
-    .hero-flight {
-      display: grid;
-      gap: 14px;
-      padding: 16px;
-      border-radius: 8px;
-      background: #fff;
-      border: 1px solid #d7e5e8;
-      margin-bottom: 12px;
-    }
-
-    .hero-flight strong {
-      color: #176a7d;
-      font-size: 15px;
-    }
-
-    .hero-flight .route {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .hero-flight .route span {
-      display: block;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-      margin-top: 3px;
-    }
-
-    .hero-flight .time {
-      font-size: 32px;
-      font-weight: 1000;
-      letter-spacing: 0;
-      line-height: 1;
-    }
-
-    .hero-flight .arrow {
-      color: #6e8b94;
-      font-weight: 1000;
-    }
-
-    .hero-board-note {
-      margin: 14px 0 0;
-      color: #53656f;
-      line-height: 1.65;
-      font-size: 14px;
     }
 
     .toolbar {
@@ -234,8 +160,8 @@
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 410px;
-      gap: 24px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
       align-items: start;
     }
 
@@ -249,9 +175,7 @@
     }
 
     .map-panel {
-      position: sticky;
-      top: 76px;
-      padding: 16px;
+      padding: 18px;
     }
 
     .map-header {
@@ -280,11 +204,17 @@
     .map-frame {
       position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1.08;
+      min-height: 620px;
       overflow: hidden;
       border-radius: 8px;
-      background: #e9f7f7;
+      background: #dcecf0;
       border: 1px solid #c8e3e5;
+    }
+
+    #tripMap {
+      width: 100%;
+      height: 100%;
+      min-height: 620px;
     }
 
     .map-controls {
@@ -314,54 +244,63 @@
       font-size: 12px;
     }
 
-    svg {
-      display: block;
-      width: 100%;
-      height: 100%;
+    .leaflet-container {
+      font-family: inherit;
     }
 
-    .island {
-      fill: #f6f3df;
-      stroke: #9dbd9c;
-      stroke-width: 2;
+    .leaflet-tile-pane {
+      filter: saturate(1.05) contrast(1.02);
     }
 
-    .bridge {
-      stroke: #aac8c9;
-      stroke-width: 4;
-      stroke-linecap: round;
-      stroke-dasharray: 5 5;
+    .map-marker {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 1000;
+      box-shadow: 0 8px 18px rgba(31, 42, 50, 0.25);
     }
 
-    .route-line {
-      fill: none;
-      stroke-width: 4;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      opacity: 0;
-      transition: opacity 0.2s ease;
+    .map-marker.hotel { background: var(--gold); }
+    .map-marker.airport { background: var(--blue); }
+    .map-marker.rental { background: var(--green); }
+    .map-marker.spot { background: var(--cyan); }
+    .map-marker.food { background: var(--orange); }
+    .map-marker.shop { background: var(--purple); }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: 8px;
     }
 
-    .marker-group {
-      opacity: 0.24;
-      transform-origin: center;
-      transition: opacity 0.18s ease, filter 0.18s ease;
-      cursor: pointer;
+    .meal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
     }
 
-    .marker-group.active {
-      opacity: 1;
-      filter: drop-shadow(0 4px 5px rgba(31, 42, 50, 0.24));
+    .meal-card {
+      border: 1px solid #d8e4e7;
+      border-radius: 8px;
+      background: #fff;
+      padding: 14px;
     }
 
-    .marker-label {
-      fill: #1f2a32;
-      font-size: 12px;
-      font-weight: 900;
-      paint-order: stroke;
-      stroke: rgba(255, 255, 255, 0.9);
-      stroke-width: 4px;
-      stroke-linejoin: round;
+    .meal-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #176a7d;
+    }
+
+    .meal-card p {
+      margin: 0;
+      color: #53656f;
+      line-height: 1.65;
+      font-size: 14px;
     }
 
     .legend {
@@ -716,28 +655,17 @@
     }
 
     @media (max-width: 980px) {
-      .hero,
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
       .hero-copy {
         min-height: auto;
         padding-bottom: 8px;
       }
 
-      .hero-board {
-        min-height: 320px;
-      }
-
-      .map-panel {
-        position: relative;
-        top: auto;
-        order: -1;
-      }
-
       .day-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .meal-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -769,8 +697,9 @@
         min-height: 190px;
       }
 
-      .map-frame {
-        aspect-ratio: 1 / 1.12;
+      .map-frame,
+      #tripMap {
+        min-height: 460px;
       }
 
       .airport-code {
@@ -781,7 +710,7 @@
 </head>
 <body>
   <header>
-    <div class="wrap hero">
+    <div class="wrap">
       <div class="hero-copy">
         <p class="eyebrow">2026/6/17（三）- 6/21（日）｜2 位大人 + 1 位 2 歲半小孩</p>
         <h1>宮古島親子旅行</h1>
@@ -790,28 +719,9 @@
           <div class="fact"><strong>去程航班</strong><span>6/17 JX308：07:20 台中 RMQ → 09:40 下地島 SHI。</span></div>
           <div class="fact"><strong>回程航班</strong><span>6/21 JX309：10:40 下地島 SHI → 11:00 台中 RMQ。</span></div>
           <div class="fact"><strong>飯店</strong><span>棕櫚泉宮古島度假村，平良久貝，4 晚。</span></div>
+          <div class="fact"><strong>租車實約</strong><span>6/17 10:30 下地機場店取車，6/20 18:00 平良港店還車。</span></div>
         </div>
       </div>
-      <aside class="hero-board" aria-label="航班時間快看">
-        <h2>航班時間快看</h2>
-        <div class="hero-flight">
-          <strong>去程｜JX308｜2026/6/17（三）</strong>
-          <div class="route">
-            <div><div class="time">07:20</div><span>RMQ 台中國際機場起飛</span></div>
-            <div class="arrow">→</div>
-            <div><div class="time">09:40</div><span>SHI 下地島機場抵達</span></div>
-          </div>
-        </div>
-        <div class="hero-flight">
-          <strong>回程｜JX309｜2026/6/21（日）</strong>
-          <div class="route">
-            <div><div class="time">10:40</div><span>SHI 下地島機場起飛</span></div>
-            <div class="arrow">→</div>
-            <div><div class="time">11:00</div><span>RMQ 台中國際機場抵達</span></div>
-          </div>
-        </div>
-        <p class="hero-board-note">建議 6/21 08:30 前完成還車，保留兒童座椅拆裝、接駁與托運行李時間。</p>
-      </aside>
     </div>
   </header>
 
@@ -828,6 +738,34 @@
 
   <main>
     <div class="wrap layout">
+      <aside class="map-panel" aria-label="宮古島互動地圖">
+        <div class="map-header">
+          <h2>互動地圖</h2>
+          <span class="tag" id="mapMode">總覽</span>
+        </div>
+        <div class="map-frame">
+          <div class="map-controls" aria-label="地圖縮放控制">
+            <button class="map-control" type="button" data-map-action="zoom-in" aria-label="放大地圖">+</button>
+            <button class="map-control" type="button" data-map-action="zoom-out" aria-label="縮小地圖">−</button>
+            <button class="map-control reset" type="button" data-map-action="reset" aria-label="重設地圖縮放">重設</button>
+          </div>
+          <div id="tripMap" aria-label="宮古島旅行互動地圖"></div>
+          <div class="map-tooltip" id="mapTip">
+            <strong>點選地圖標記看位置</strong>
+            <span>現在改成真實底圖，可以直接看海灘、商店、便利商店與每日路線的相對位置。</span>
+          </div>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background: var(--gold)"></i>飯店</span>
+          <span><i class="dot" style="background: var(--blue)"></i>機場</span>
+          <span><i class="dot" style="background: var(--green)"></i>租車 / 還車</span>
+          <span><i class="dot" style="background: var(--cyan)"></i>景點 / 海灘</span>
+          <span><i class="dot" style="background: var(--orange)"></i>餐廳</span>
+          <span><i class="dot" style="background: var(--purple)"></i>購物</span>
+        </div>
+        <p class="map-note">底圖使用 OpenStreetMap，需有網路才會載入。切換日期時，地圖會突出顯示當天路線與相關點位。</p>
+      </aside>
+
       <section class="content" aria-live="polite">
         <article class="view active" id="overview">
           <section class="section">
@@ -857,7 +795,7 @@
               <button class="day-card js-jump" type="button" data-tab="day621">
                 <time>6/21（日）</time>
                 <h3>退房與還車</h3>
-                <p>早起退房，08:30 前還車，10:40 從下地島機場起飛回台中。</p>
+                <p>這天沒有租車，退房後需用計程車或預約接送前往下地島機場，10:40 起飛回台中。</p>
               </button>
             </div>
           </section>
@@ -896,21 +834,22 @@
                 </div>
               </div>
               <div class="info-panel">
-                <h3>下地島機場租車 / 還車</h3>
-                <p>建議抵達後直接取車，回程 08:30 前完成還車。訂車時確認兒童座椅、免責補償、NOC 補償與機場接送方式。</p>
+                <h3>MY 租車預約資訊</h3>
+                <p>預約號碼 231997581。實際預約為 3 人、SK Class 1 台，6/17 10:30 於 MY 租車下地機場店取車，6/20 18:00 於 MY 租車平良港店還車。</p>
                 <div class="tag-row">
-                  <a class="tag" href="https://meets-rentacar.com/" target="_blank" rel="noreferrer">租車參考</a>
-                  <a class="tag" href="https://maps.google.com/?q=%E4%B8%8B%E5%9C%B0%E5%B3%B6%E7%A9%BA%E6%B8%AF%20%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC" target="_blank" rel="noreferrer">Google Maps</a>
+                  <a class="tag" href="https://www.okitour.co.jp/rentacars/myrentacar/branches/558" target="_blank" rel="noreferrer">下地機場店資訊</a>
+                  <a class="tag" href="https://www.okitour.co.jp/rentacars/myrentacar/branches/557" target="_blank" rel="noreferrer">平良港店資訊</a>
                 </div>
               </div>
             </div>
-            <div class="callout">親子提醒：每天車上放一套乾衣服、浴巾、防曬、補水、簡單零食。海邊活動以「先玩短一點」為原則，狀況好再加碼。</div>
+            <div class="callout">租車細節：總價 22980 日圓，含免責補償 + NOC、GPS、幼兒座椅 1 張，以及下地機場取車單程還車費 1500 日圓。下地機場店目前尚未完整顯示在 Google 地圖上，官方提醒可先搜尋「全家便利店 宮古伊良部店」，到其對面集合，機場與店舖之間有免費接駁，車程約 10 分鐘。</div>
           </section>
 
           <section class="section">
             <h2>必訂與備忘</h2>
             <ul class="list">
-              <li><strong>租車：</strong>下地島機場取還車，確認兒童座椅、NOC 免責、接送位置。</li>
+              <li><strong>租車：</strong>MY 租車，預約號 231997581，6/17 10:30 下地機場店取車，6/20 18:00 平良港店還車。</li>
+              <li><strong>證件：</strong>台灣旅客需備妥護照、台灣駕照、日文譯本正本與信用卡。</li>
               <li><strong>6/18 祭典：</strong>佐良浜漁港ハーリー，帶帽子、防曬、現金與輕便雨具。</li>
               <li><strong>6/19 體驗：</strong>シースカイ博愛建議訂 09:00 或 10:00，避免卡午休與午後炎熱。</li>
               <li><strong>燒肉：</strong>ホルモン家優先訂 17:00，備註 2 位成人 + 1 位幼兒，希望親子友善座位。</li>
@@ -918,74 +857,34 @@
           </section>
         </article>
       </section>
-
-      <aside class="map-panel" aria-label="宮古島電子圖台">
-        <div class="map-header">
-          <h2>電子圖台</h2>
-          <span class="tag" id="mapMode">總覽</span>
-        </div>
-        <div class="map-frame">
-          <div class="map-controls" aria-label="地圖縮放控制">
-            <button class="map-control" type="button" data-map-action="zoom-in" aria-label="放大地圖">+</button>
-            <button class="map-control" type="button" data-map-action="zoom-out" aria-label="縮小地圖">−</button>
-            <button class="map-control reset" type="button" data-map-action="reset" aria-label="重設地圖縮放">重設</button>
-          </div>
-          <svg id="tripMap" viewBox="0 0 420 460" role="img" aria-label="宮古島旅行行程位置圖">
-            <rect width="420" height="460" fill="#e2f5f6"></rect>
-            <path class="bridge" d="M145 172 C180 181, 210 196, 245 218"></path>
-            <path class="bridge" d="M300 92 C318 84, 338 77, 360 74"></path>
-            <path class="island" d="M248 142 C291 126, 341 139, 361 179 C386 230, 372 284, 346 329 C323 370, 291 409, 241 405 C197 402, 159 376, 141 338 C121 296, 122 245, 145 208 C166 174, 208 157, 248 142 Z"></path>
-            <path class="island" d="M75 106 C105 88, 142 94, 162 121 C180 146, 173 178, 150 198 C123 221, 83 220, 61 193 C37 164, 44 125, 75 106 Z"></path>
-            <path class="island" d="M65 52 C83 42, 106 46, 118 64 C130 83, 122 106, 101 115 C83 123, 62 117, 52 99 C43 81, 48 62, 65 52 Z"></path>
-            <path class="island" d="M358 49 C374 38, 394 42, 404 58 C414 75, 405 96, 386 102 C367 108, 350 96, 346 77 C344 65, 349 55, 358 49 Z"></path>
-            <text x="255" y="270" fill="#9ab2a4" font-size="28" font-weight="900" opacity="0.42">宮古島</text>
-            <text x="74" y="166" fill="#9ab2a4" font-size="18" font-weight="900" opacity="0.48">伊良部島</text>
-            <text x="60" y="78" fill="#9ab2a4" font-size="13" font-weight="900" opacity="0.55">下地島</text>
-            <text x="356" y="80" fill="#9ab2a4" font-size="13" font-weight="900" opacity="0.55">池間島</text>
-            <g id="routes"></g>
-            <g id="markers"></g>
-          </svg>
-          <div class="map-tooltip" id="mapTip">
-            <strong>點選標記看位置</strong>
-            <span>切換日期時，地圖會突出當天路線與點位。</span>
-          </div>
-        </div>
-        <div class="legend">
-          <span><i class="dot" style="background: var(--gold)"></i>飯店</span>
-          <span><i class="dot" style="background: var(--blue)"></i>機場</span>
-          <span><i class="dot" style="background: var(--green)"></i>租車 / 還車</span>
-          <span><i class="dot" style="background: var(--cyan)"></i>景點 / 海灘</span>
-          <span><i class="dot" style="background: var(--orange)"></i>餐廳</span>
-          <span><i class="dot" style="background: var(--purple)"></i>購物</span>
-        </div>
-        <p class="map-note">這是離線用的簡化位置圖，可用 + / − 或滑鼠滾輪縮放；實際導航請點各景點的 Google Maps 連結。</p>
-      </aside>
     </div>
   </main>
 
   <footer>
-    <div class="wrap">製作時間：2026/5/19。外部介紹與 Google Maps 需要網路；行程內容與簡化電子圖台可離線閱讀。</div>
+    <div class="wrap">製作時間：2026/5/19。外部介紹與互動地圖需要網路；切換日期後可直接對照實際底圖看相對位置。</div>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
     const stops = {
-      airport: { name: "下地島機場", type: "airport", x: 80, y: 88, desc: "抵達與回程機場", map: "https://maps.google.com/?q=Shimojishima%20Airport", intro: "https://zh.wikipedia.org/wiki/%E4%B8%8B%E5%9C%B0%E5%B3%B6%E6%A9%9F%E5%A0%B4" },
-      rental: { name: "下地島機場租車", type: "rental", x: 101, y: 105, desc: "取車與還車地點", map: "https://maps.google.com/?q=%E4%B8%8B%E5%9C%B0%E5%B3%B6%E7%A9%BA%E6%B8%AF%20%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC", intro: "https://meets-rentacar.com/" },
-      end17: { name: "17END", type: "spot", x: 61, y: 62, desc: "下地島北端的宮古藍海景", map: "https://maps.google.com/?q=17END%20Miyakojima", intro: "https://www.tanoshima.jp/facilities/detail/17end?category=spot" },
-      sawada: { name: "佐和田之濱", type: "spot", x: 113, y: 144, desc: "日本渚百選，適合看海與踩水", map: "https://maps.google.com/?q=%E4%BD%90%E5%92%8C%E7%94%B0%E3%81%AE%E6%B5%9C", intro: "https://www.gltjp.com/zh-hant/directory/item/16191/" },
-      hotel: { name: "棕櫚泉宮古島度假村", type: "hotel", x: 226, y: 231, desc: "6/17-6/21 住宿", map: "https://maps.google.com/?q=Palm%20Springs%20Miyakojima%20Resort", intro: "https://www.klook.com/zh-TW/hotels/detail/115529-palm-springs-miyakojima-resort/" },
-      painagama: { name: "Painagama Beach", type: "spot", x: 233, y: 211, desc: "市區旁親民海灘", map: "https://maps.google.com/?q=Painagama%20Beach", intro: "https://japantravel.navitime.com/zh-tw/area/jp/spot/02301-pn0002196/" },
-      donki: { name: "唐吉訶德宮古島店", type: "shop", x: 286, y: 242, desc: "第一天補給與伴手禮", map: "https://maps.google.com/?q=%E3%83%89%E3%83%B3%E3%83%BB%E3%82%AD%E3%83%9B%E3%83%BC%E3%83%86%E5%AE%AE%E5%8F%A4%E5%B3%B6%E5%BA%97", intro: "https://www.donki.com/store/shop_detail.php?shop_id=420" },
-      sarahama: { name: "佐良浜漁港ハーリー", type: "spot", x: 151, y: 157, desc: "海神祭主要會場之一", map: "https://maps.google.com/?q=%E4%BD%90%E8%89%AF%E6%B5%9C%E6%BC%81%E6%B8%AF", intro: "https://miyakojima.jp/events/haarii/" },
-      yakiniku: { name: "ホルモン家", type: "food", x: 263, y: 224, desc: "親子友善燒肉候選", map: "https://maps.google.com/?q=%E3%83%9B%E3%83%AB%E3%83%A2%E3%83%B3%E5%AE%B6%20%E5%AE%AE%E5%8F%A4%E5%B3%B6", intro: "https://maps.google.com/?q=%E3%83%9B%E3%83%AB%E3%83%A2%E3%83%B3%E5%AE%B6%20%E5%AE%AE%E5%8F%A4%E5%B3%B6" },
-      seasky: { name: "シースカイ博愛", type: "spot", x: 315, y: 331, desc: "半潛水式玻璃船", map: "https://maps.google.com/?q=%E3%82%B7%E3%83%BC%E3%82%B9%E3%82%AB%E3%82%A4%E5%8D%9A%E6%84%9B", intro: "https://www.nanseirakuen.com/activity/sea-sky-hakuai/" },
-      shigira: { name: "シギラビーチ", type: "spot", x: 327, y: 345, desc: "設施較完整的親子海灘", map: "https://maps.google.com/?q=%E3%82%B7%E3%82%AE%E3%83%A9%E3%83%93%E3%83%BC%E3%83%81", intro: "https://churarin.com/shigira-beach/" },
-      waiwai: { name: "わいわいビーチ", type: "spot", x: 308, y: 333, desc: "可能看見海龜的人工海灘", map: "https://maps.google.com/?q=%E3%82%8F%E3%81%84%E3%82%8F%E3%81%84%E3%83%93%E3%83%BC%E3%83%81%20%E5%AE%AE%E5%8F%A4%E5%B3%B6", intro: "https://myakuzumi.com/6692/" },
-      ikemaBridge: { name: "池間大橋", type: "spot", x: 337, y: 96, desc: "前往池間島的海景橋", map: "https://maps.google.com/?q=%E6%B1%A0%E9%96%93%E5%A4%A7%E6%A9%8B", intro: "https://zh.wikipedia.org/wiki/%E6%B1%A0%E9%96%93%E5%A4%A7%E6%A9%8B" },
-      ikema: { name: "池間島", type: "spot", x: 377, y: 72, desc: "北端小島與海景", map: "https://maps.google.com/?q=%E6%B1%A0%E9%96%93%E5%B3%B6", intro: "https://zh.wikipedia.org/wiki/%E6%B1%A0%E9%96%93%E5%B3%B6" },
-      niima: { name: "にいまそば", type: "food", x: 300, y: 126, desc: "北部宮古そば午餐", map: "https://maps.google.com/?q=%E3%81%AB%E3%81%84%E3%81%BE%E3%81%9D%E3%81%B0", intro: "https://myakuzumi.com/93/" },
-      yukishio: { name: "雪塩ミュージアム", type: "spot", x: 314, y: 115, desc: "伴手禮與短暫室內休息", map: "https://maps.google.com/?q=%E9%9B%AA%E5%A1%A9%E3%83%9F%E3%83%A5%E3%83%BC%E3%82%B8%E3%82%A2%E3%83%A0", intro: "https://www.yukisio.com/" },
-      nishimatsuya: { name: "西松屋 / イオンタウン宮古南", type: "shop", x: 286, y: 263, desc: "母嬰用品與生活採買", map: "https://maps.google.com/?q=%E8%A5%BF%E6%9D%BE%E5%B1%8B%20%E3%82%A4%E3%82%AA%E3%83%B3%E3%82%BF%E3%82%A6%E3%83%B3%E5%AE%AE%E5%8F%A4%E5%8D%97%E5%BA%97", intro: "https://www.24028.jp/tenpo/detail.php?cid=47&doc=1398" }
+      airport: { name: "下地島機場", type: "airport", lat: 24.8267, lng: 125.1446, desc: "抵達與回程機場", map: "https://maps.google.com/?q=Shimojishima%20Airport", intro: "https://zh.wikipedia.org/wiki/%E4%B8%8B%E5%9C%B0%E5%B3%B6%E6%A9%9F%E5%A0%B4" },
+      rental: { name: "MY 租車下地機場店", type: "rental", lat: 24.8247, lng: 125.1564, desc: "6/17 10:30 取車，機場免費接駁約 10 分鐘", map: "https://maps.google.com/?q=%E5%85%A8%E5%AE%B6%E4%BE%BF%E5%88%A9%E5%95%86%E5%BA%97%20%E5%AE%AE%E5%8F%A4%E4%BC%8A%E8%89%AF%E9%83%A8%E5%BA%97", intro: "https://www.okitour.co.jp/rentacars/myrentacar/branches/558" },
+      rentalReturn: { name: "MY 租車平良港店", type: "rental", lat: 24.8082, lng: 125.2813, desc: "6/20 18:00 還車，郵輪港口旁步行約 10 分鐘", map: "https://maps.google.com/?q=MY%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E5%B9%B3%E8%89%AF%E6%B8%AF%E5%BA%97", intro: "https://www.okitour.co.jp/rentacars/myrentacar/branches/557" },
+      end17: { name: "17END", type: "spot", lat: 24.8428, lng: 125.1362, desc: "下地島北端的宮古藍海景", map: "https://maps.google.com/?q=17END%20Miyakojima", intro: "https://www.tanoshima.jp/facilities/detail/17end?category=spot" },
+      sawada: { name: "佐和田之濱", type: "spot", lat: 24.8386, lng: 125.1734, desc: "日本渚百選，適合看海與踩水", map: "https://maps.google.com/?q=%E4%BD%90%E5%92%8C%E7%94%B0%E3%81%AE%E6%B5%9C", intro: "https://www.gltjp.com/zh-hant/directory/item/16191/" },
+      hotel: { name: "棕櫚泉宮古島度假村", type: "hotel", lat: 24.7967, lng: 125.2733, desc: "6/17-6/21 住宿", map: "https://maps.google.com/?q=Palm%20Springs%20Miyakojima%20Resort", intro: "https://www.klook.com/zh-TW/hotels/detail/115529-palm-springs-miyakojima-resort/" },
+      painagama: { name: "Painagama Beach", type: "spot", lat: 24.8037, lng: 125.2723, desc: "市區旁親民海灘", map: "https://maps.google.com/?q=Painagama%20Beach", intro: "https://japantravel.navitime.com/zh-tw/area/jp/spot/02301-pn0002196/" },
+      donki: { name: "唐吉訶德宮古島店", type: "shop", lat: 24.7815, lng: 125.2961, desc: "第一天補給與伴手禮", map: "https://maps.google.com/?q=%E3%83%89%E3%83%B3%E3%83%BB%E3%82%AD%E3%83%9B%E3%83%BC%E3%83%86%E5%AE%AE%E5%8F%A4%E5%B3%B6%E5%BA%97", intro: "https://www.donki.com/store/shop_detail.php?shop_id=420" },
+      sarahama: { name: "佐良浜漁港ハーリー", type: "spot", lat: 24.8262, lng: 125.2016, desc: "海神祭主要會場之一", map: "https://maps.google.com/?q=%E4%BD%90%E8%89%AF%E6%B5%9C%E6%BC%81%E6%B8%AF", intro: "https://miyakojima.jp/events/haarii/" },
+      yakiniku: { name: "ホルモン家", type: "food", lat: 24.8013, lng: 125.2825, desc: "親子友善燒肉候選", map: "https://maps.google.com/?q=%E3%83%9B%E3%83%AB%E3%83%A2%E3%83%B3%E5%AE%B6%20%E5%AE%AE%E5%8F%A4%E5%B3%B6", intro: "https://maps.google.com/?q=%E3%83%9B%E3%83%AB%E3%83%A2%E3%83%B3%E5%AE%B6%20%E5%AE%AE%E5%8F%A4%E5%B3%B6" },
+      seasky: { name: "シースカイ博愛", type: "spot", lat: 24.7421, lng: 125.3312, desc: "半潛水式玻璃船", map: "https://maps.google.com/?q=%E3%82%B7%E3%83%BC%E3%82%B9%E3%82%AB%E3%82%A4%E5%8D%9A%E6%84%9B", intro: "https://www.nanseirakuen.com/activity/sea-sky-hakuai/" },
+      shigira: { name: "シギラビーチ", type: "spot", lat: 24.7336, lng: 125.3453, desc: "設施較完整的親子海灘", map: "https://maps.google.com/?q=%E3%82%B7%E3%82%AE%E3%83%A9%E3%83%93%E3%83%BC%E3%83%81", intro: "https://churarin.com/shigira-beach/" },
+      waiwai: { name: "わいわいビーチ", type: "spot", lat: 24.7394, lng: 125.3368, desc: "可能看見海龜的人工海灘", map: "https://maps.google.com/?q=%E3%82%8F%E3%81%84%E3%82%8F%E3%81%84%E3%83%93%E3%83%BC%E3%83%81%20%E5%AE%AE%E5%8F%A4%E5%B3%B6", intro: "https://myakuzumi.com/6692/" },
+      ikemaBridge: { name: "池間大橋", type: "spot", lat: 24.9147, lng: 125.2458, desc: "前往池間島的海景橋", map: "https://maps.google.com/?q=%E6%B1%A0%E9%96%93%E5%A4%A7%E6%A9%8B", intro: "https://zh.wikipedia.org/wiki/%E6%B1%A0%E9%96%93%E5%A4%A7%E6%A9%8B" },
+      ikema: { name: "池間島", type: "spot", lat: 24.9285, lng: 125.2418, desc: "北端小島與海景", map: "https://maps.google.com/?q=%E6%B1%A0%E9%96%93%E5%B3%B6", intro: "https://zh.wikipedia.org/wiki/%E6%B1%A0%E9%96%93%E5%B3%B6" },
+      niima: { name: "にいまそば", type: "food", lat: 24.8896, lng: 125.2668, desc: "北部宮古そば午餐", map: "https://maps.google.com/?q=%E3%81%AB%E3%81%84%E3%81%BE%E3%81%9D%E3%81%B0", intro: "https://myakuzumi.com/93/" },
+      yukishio: { name: "雪塩ミュージアム", type: "spot", lat: 24.8861, lng: 125.2829, desc: "伴手禮與短暫室內休息", map: "https://maps.google.com/?q=%E9%9B%AA%E5%A1%A9%E3%83%9F%E3%83%A5%E3%83%BC%E3%82%B8%E3%82%A2%E3%83%A0", intro: "https://www.yukisio.com/" },
+      nishimatsuya: { name: "西松屋 / イオンタウン宮古南", type: "shop", lat: 24.7784, lng: 125.3028, desc: "母嬰用品與生活採買", map: "https://maps.google.com/?q=%E8%A5%BF%E6%9D%BE%E5%B1%8B%20%E3%82%A4%E3%82%AA%E3%83%B3%E3%82%BF%E3%82%A6%E3%83%B3%E5%AE%AE%E5%8F%A4%E5%8D%97%E5%BA%97", intro: "https://www.24028.jp/tenpo/detail.php?cid=47&doc=1398" }
     };
 
     const days = {
@@ -993,8 +892,8 @@
       day617: ["airport", "rental", "end17", "sawada", "hotel", "painagama", "donki"],
       day618: ["hotel", "sarahama", "hotel", "yakiniku"],
       day619: ["hotel", "seasky", "shigira", "waiwai", "hotel"],
-      day620: ["hotel", "ikemaBridge", "ikema", "niima", "yukishio", "nishimatsuya", "hotel"],
-      day621: ["hotel", "rental", "airport"]
+      day620: ["hotel", "ikemaBridge", "ikema", "niima", "yukishio", "nishimatsuya", "rentalReturn"],
+      day621: ["hotel", "airport"]
     };
 
     const routeColors = {
@@ -1009,9 +908,14 @@
       day617: {
         title: "6/17（三）抵達、取車、看海",
         intro: "第一天重點是順利落地、取車、入住，不把小孩體力花光。海灘以看海、踩水、玩沙為主。",
+        meals: {
+          breakfast: "機上早餐或台中機場簡單吃，避免落地後太餓。",
+          lunch: "伊良部島一帶簡單吃沖繩麵或咖哩，依取車後時間彈性安排。",
+          dinner: "飯店附近簡單晚餐，或去唐吉訶德買熟食、飯糰、水果回房吃。"
+        },
         items: [
           ["09:40", "下地島機場", "JX308 抵達。先處理行李、洗手間、補水，再前往租車櫃檯或接送點。", "airport"],
-          ["10:20", "下地島機場租車", "確認兒童座椅安裝、車況照片、NOC 免責與還車時間。", "rental"],
+          ["10:20", "MY 租車下地機場店", "預約號 231997581。機場與店舖間有免費接駁，車程約 10 分鐘；確認兒童座椅、GPS、NOC 與單程還車資訊。", "rental"],
           ["11:00", "17END", "先用宮古藍開場，看飛機與海，停留拍照即可。", "end17"],
           ["11:45", "佐和田之濱", "日本渚百選之一，適合短暫踩水、看淺灘與巨石海景。", "sawada"],
           ["15:00", "棕櫚泉宮古島度假村", "入住、整理行李、午休或洗澡。第一天不要急著排滿。", "hotel"],
@@ -1022,6 +926,11 @@
       day618: {
         title: "6/18（四）海神祭與燒肉",
         intro: "這天是旅程最有在地感的一天。上午去佐良浜漁港看ハーリー，午後回飯店休息，傍晚早點吃燒肉。",
+        meals: {
+          breakfast: "飯店周邊輕早餐或超商麵包牛奶，早點出門去祭典。",
+          lunch: "佐良浜漁港祭典攤販，優先吃好拿、好分食的在地小吃。",
+          dinner: "ホルモン家燒肉，安排 17:00 左右早晚餐最適合帶小孩。"
+        },
         items: [
           ["09:00", "佐良浜漁港ハーリー", "宮古島海神祭的熱鬧會場之一，可看爬龍船、港邊慶典與攤販。", "sarahama"],
           ["12:00", "祭典午餐或平良市區", "用攤販簡單吃，若太熱就回市區找冷氣餐廳。帶現金會更方便。", "sarahama"],
@@ -1032,6 +941,11 @@
       day619: {
         title: "6/19（五）玻璃船與沙灘",
         intro: "安排一次小朋友友善的海上體驗。早上看珊瑚與海龜，下午視體力選一個沙灘短玩。",
+        meals: {
+          breakfast: "飯店附近早餐店或便利商店簡單解決，方便準時到船班。",
+          lunch: "南岸簡單午餐，優先找有冷氣、上菜快的沖繩料理或咖啡店。",
+          dinner: "平良市區家庭料理或外帶回飯店，讓玩水後的收尾輕鬆一點。"
+        },
         items: [
           ["09:00", "シースカイ博愛", "半潛水式水中觀光船，不需要下水也能看海底世界，適合幼兒同行。", "seasky"],
           ["11:30", "南部午餐", "用餐後直接回飯店或在南部找簡單餐廳，不硬塞景點。", "seasky"],
@@ -1043,20 +957,31 @@
       day620: {
         title: "6/20（六）北部橋景、宮古麵與採買",
         intro: "最後完整一天走北部海景，午餐吃にいまそば，下午回到市區採買母嬰用品與伴手禮。",
+        meals: {
+          breakfast: "飯店附近咖啡與麵包，早點出發去北邊看海。",
+          lunch: "にいまそば，這餐就定成這次旅程的重點沖繩麵。",
+          dinner: "還車前在平良市區吃一頓早晚餐，想簡單可選宮古そば或海鮮丼。"
+        },
         items: [
           ["09:00", "池間大橋", "沿著北部開車看海，橋上風景很美，停留拍照即可。", "ikemaBridge"],
           ["09:40", "池間島", "小島短停，看海、買飲料、讓小孩活動一下。", "ikema"],
           ["11:00", "にいまそば", "北部人氣宮古そば，建議開門就到，避免排隊太久或售完。", "niima"],
           ["12:30", "雪塩ミュージアム", "短暫室內休息、買鹽相關伴手禮，適合避暑。", "yukishio"],
-          ["16:00", "西松屋 / イオンタウン宮古南", "尿布、濕紙巾、母嬰用品與超市補給一次完成。", "nishimatsuya"]
+          ["16:00", "西松屋 / イオンタウン宮古南", "尿布、濕紙巾、母嬰用品與超市補給一次完成。", "nishimatsuya"],
+          ["18:00", "MY 租車平良港店還車", "實際預約在這天傍晚還車。平良港店位置為郵輪港口旁，步行約 10 分鐘可到店。", "rentalReturn"]
         ]
       },
       day621: {
         title: "6/21（日）退房與回程",
-        intro: "這天不排景點，目標是舒服退房、準時還車與登機。",
+        intro: "這天不排景點，也沒有租車。重點是安排好飯店到下地島機場的接送，舒服退房後直接前往機場。",
+        meals: {
+          breakfast: "退房前先在飯店附近或便利商店吃簡單早餐。",
+          lunch: "返台後在台中再正式吃，機場以點心和飲水補給為主。",
+          dinner: "回家後自由安排，這天頁面先不硬塞。"
+        },
         items: [
-          ["07:30", "飯店退房", "確認房內沒有漏掉充電器、泳衣、兒童用品與護照。", "hotel"],
-          ["08:15", "下地島機場租車還車", "加油、還車、整理行李。保留時間處理兒童座椅與接駁。", "rental"],
+          ["07:30", "飯店退房", "確認房內沒有漏掉充電器、泳衣、兒童用品與護照，並依前一晚安排好的方式前往機場。", "hotel"],
+          ["08:00", "飯店出發前往機場", "這段需另外預約計程車或接送；因前一晚已還車，建議提早確認車資與接送時間。", "hotel"],
           ["10:40", "下地島機場", "JX309 起飛回台中，預計 11:00 抵達 RMQ。", "airport"]
         ]
       }
@@ -1085,6 +1010,16 @@
       const article = document.createElement("article");
       article.className = "view";
       article.id = id;
+      const meals = day.meals ? `
+        <section class="section">
+          <h2>每日三餐</h2>
+          <div class="meal-grid">
+            <div class="meal-card"><h3>早餐</h3><p>${day.meals.breakfast}</p></div>
+            <div class="meal-card"><h3>午餐</h3><p>${day.meals.lunch}</p></div>
+            <div class="meal-card"><h3>晚餐</h3><p>${day.meals.dinner}</p></div>
+          </div>
+        </section>
+      ` : "";
       const timeline = day.items.map(item => {
         const [time, title, text, stopKey] = item;
         const stop = stops[stopKey];
@@ -1117,6 +1052,7 @@
           <p>${day.intro}</p>
           <div class="timeline">${timeline}</div>
         </section>
+        ${meals}
         <section class="section">
           <h2>當日親子提醒</h2>
           <ul class="list">
@@ -1129,82 +1065,55 @@
       content.appendChild(article);
     });
 
-    const markerLayer = document.getElementById("markers");
-    const routesLayer = document.getElementById("routes");
     const mapTip = document.getElementById("mapTip");
     const mapMode = document.getElementById("mapMode");
     const tripMap = document.getElementById("tripMap");
-    const svgNS = "http://www.w3.org/2000/svg";
-    const defaultViewBox = { x: 0, y: 0, w: 420, h: 460 };
-    let currentViewBox = { ...defaultViewBox };
+    const map = L.map(tripMap, { zoomControl: false, scrollWheelZoom: true }).setView([24.83, 125.27], 11);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-    function makeSvg(tag, attrs = {}) {
-      const el = document.createElementNS(svgNS, tag);
-      Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
-      return el;
+    const allLatLngs = Object.values(stops).map(stop => [stop.lat, stop.lng]);
+    const defaultBounds = L.latLngBounds(allLatLngs).pad(0.18);
+    const routeLayers = {};
+    const markerLayers = {};
+
+    function makeMarker(stop) {
+      const icon = L.divIcon({
+        className: "",
+        html: `<div class="map-marker ${stop.type}">${typeIcons[stop.type]}</div>`,
+        iconSize: [22, 22],
+        iconAnchor: [11, 11],
+        popupAnchor: [0, -10]
+      });
+      const marker = L.marker([stop.lat, stop.lng], { icon });
+      marker.bindPopup(`<strong>${stop.name}</strong><br>${stop.desc}`);
+      marker.on("click", () => {
+        mapTip.innerHTML = `<strong>${stop.name}</strong><span>${stop.desc}</span>`;
+      });
+      return marker;
     }
-
-    function applyViewBox() {
-      tripMap.setAttribute("viewBox", `${currentViewBox.x} ${currentViewBox.y} ${currentViewBox.w} ${currentViewBox.h}`);
-    }
-
-    function zoomMap(factor) {
-      const nextW = Math.max(150, Math.min(defaultViewBox.w, currentViewBox.w * factor));
-      const nextH = Math.max(165, Math.min(defaultViewBox.h, currentViewBox.h * factor));
-      const cx = currentViewBox.x + currentViewBox.w / 2;
-      const cy = currentViewBox.y + currentViewBox.h / 2;
-      currentViewBox = {
-        x: Math.max(defaultViewBox.x, Math.min(defaultViewBox.x + defaultViewBox.w - nextW, cx - nextW / 2)),
-        y: Math.max(defaultViewBox.y, Math.min(defaultViewBox.y + defaultViewBox.h - nextH, cy - nextH / 2)),
-        w: nextW,
-        h: nextH
-      };
-      applyViewBox();
-    }
-
-    function resetMapZoom() {
-      currentViewBox = { ...defaultViewBox };
-      applyViewBox();
-    }
-
-    Object.entries(routeColors).forEach(([day, color]) => {
-      const path = days[day].map((key, index) => {
-        const stop = stops[key];
-        return `${index === 0 ? "M" : "L"} ${stop.x} ${stop.y}`;
-      }).join(" ");
-      const line = makeSvg("path", { d: path, class: "route-line", id: `route-${day}`, stroke: color });
-      routesLayer.appendChild(line);
-    });
 
     Object.entries(stops).forEach(([key, stop]) => {
-      const g = makeSvg("g", { class: "marker-group", id: `marker-${key}`, transform: `translate(${stop.x}, ${stop.y})`, tabindex: "0", role: "button", "aria-label": stop.name });
-      const circle = makeSvg("circle", { r: 12, fill: typeColors[stop.type], stroke: "#fff", "stroke-width": 3 });
-      const text = makeSvg("text", { x: 0, y: 4, "text-anchor": "middle", fill: "#fff", "font-size": stop.type === "rental" ? 8 : 10, "font-weight": 900 });
-      text.textContent = typeIcons[stop.type];
-      const label = makeSvg("text", { x: 15, y: 4, class: "marker-label" });
-      label.textContent = stop.name;
-      g.append(circle, text, label);
-      const showTip = () => {
-        mapTip.innerHTML = `<strong>${stop.name}</strong><span>${stop.desc}</span>`;
-      };
-      g.addEventListener("click", showTip);
-      g.addEventListener("focus", showTip);
-      markerLayer.appendChild(g);
+      markerLayers[key] = makeMarker(stop);
+    });
+
+    Object.entries(routeColors).forEach(([day, color]) => {
+      routeLayers[day] = L.polyline(
+        days[day].map(key => [stops[key].lat, stops[key].lng]),
+        { color, weight: 5, opacity: 0.88 }
+      );
     });
 
     document.querySelectorAll("[data-map-action]").forEach(button => {
       button.addEventListener("click", () => {
         const action = button.dataset.mapAction;
-        if (action === "zoom-in") zoomMap(0.72);
-        if (action === "zoom-out") zoomMap(1.28);
-        if (action === "reset") resetMapZoom();
+        if (action === "zoom-in") map.zoomIn();
+        if (action === "zoom-out") map.zoomOut();
+        if (action === "reset") map.fitBounds(defaultBounds, { padding: [24, 24] });
       });
     });
-
-    tripMap.addEventListener("wheel", event => {
-      event.preventDefault();
-      zoomMap(event.deltaY < 0 ? 0.86 : 1.16);
-    }, { passive: false });
 
     function setActiveTab(tabId) {
       document.querySelectorAll(".tab").forEach(tab => {
@@ -1213,20 +1122,23 @@
       document.querySelectorAll(".view").forEach(view => {
         view.classList.toggle("active", view.id === tabId);
       });
-      const activeStops = new Set(days[tabId]);
-      Object.keys(stops).forEach(key => {
-        const marker = document.getElementById(`marker-${key}`);
-        marker.classList.toggle("active", activeStops.has(key));
-      });
-      Object.keys(routeColors).forEach(day => {
-        const route = document.getElementById(`route-${day}`);
-        route.style.opacity = tabId === "overview" || tabId === day ? "0.92" : "0";
-        route.style.strokeWidth = tabId === day ? "5" : "2.5";
-      });
+      Object.values(markerLayers).forEach(layer => map.removeLayer(layer));
+      Object.values(routeLayers).forEach(layer => map.removeLayer(layer));
+
+      const activeStops = tabId === "overview" ? Object.keys(stops) : days[tabId];
+      activeStops.forEach(key => markerLayers[key].addTo(map));
+
+      if (tabId === "overview") {
+        Object.values(routeLayers).forEach(layer => layer.addTo(map));
+      } else if (routeLayers[tabId]) {
+        routeLayers[tabId].addTo(map);
+      }
+
       mapMode.textContent = tabId === "overview" ? "總覽" : document.querySelector(`.tab[data-tab="${tabId}"]`).textContent.trim();
-      const firstKey = days[tabId][0];
+      const firstKey = activeStops[0];
       mapTip.innerHTML = `<strong>${stops[firstKey].name}</strong><span>${tabId === "overview" ? "目前顯示全部景點與路線。" : "目前突出顯示當天行程。"}</span>`;
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      const bounds = L.latLngBounds(activeStops.map(key => [stops[key].lat, stops[key].lng])).pad(0.22);
+      map.fitBounds(bounds, { padding: [28, 28], maxZoom: tabId === "overview" ? 11 : 13 });
     }
 
     document.querySelectorAll(".tab").forEach(tab => {
@@ -1237,7 +1149,9 @@
       card.addEventListener("click", () => setActiveTab(card.dataset.tab));
     });
 
+    map.fitBounds(defaultBounds, { padding: [24, 24] });
     setActiveTab("overview");
+    setTimeout(() => map.invalidateSize(), 50);
   </script>
 </body>
 </html>
